@@ -1,19 +1,18 @@
 // () ... for debug and test purpose. you can delete them
 // *value may need to be changed
-//
 
 window.onload = pageReady;
 function pageReady() {
 
 // Global Variable
-  var htmlCatcher = document.getElementById('catcher');
   var htmlPlayArea = document.getElementById('area');
   var htmlObjArea = document.getElementById('obj-area');
   var htmlStart = document.getElementById('start');
 
-//==== 1. Move catcher within the limited area ====
+//==== 1. Move catcher ====
 
-  // // Call cursorCoordinate function when mouse is moving in the area
+// 1-1. Move catcher with mouse
+  // Call cursorCoordinate function when mouse is moving in the area
   // htmlPlayArea.onmousemove = cursorCoordinate;
   //
   // // Get cursor coordinate and reflect cursor coordinate to catcher
@@ -35,35 +34,42 @@ function pageReady() {
   //     htmlCatcher.style.left = x-60+'px'; // *substract margin + about 1/2 width of catcher
   //   }
   // }
-// ==== End of 1. Move catcher within the limited area ====
+//End of 1-1. Move catcher with mouse
 
-// === 1-1. Move catcher slower===
-// Variables
-var mouseX = 0;
-var catcherX = 200;
-var catcher = document.getElementById('catcher');
+// 1-2. Move catcher slower
+// // Grobal Variables
+// var mouseX = 215; // initial position (centre of the area = 400+30/2)
+// var catcherX = 215;
+// var catcher = document.getElementById('catcher');
+//
+// // Detect X coordinate of the mouse cursor
+// htmlPlayArea.onmousemove = getCursorPosX;
+// function getCursorPosX(domEvent) {
+//   mouseX = domEvent.clientX;
+// }
+//
+// // Move the catcher every 10 ms within the area
+// var animateCatcher = setInterval(function(){
+//   //move to the right
+// if (mouseX-catcherX > 0 && catcherX < 386) {
+//   // controll the speed
+//   catcherX += 1.8;
+// }
+//   //move to the left
+// if (mouseX-catcherX < 0 && catcherX > 66) {
+//   catcherX -= 1.8;
+// }
+//     catcher.style.left = catcherX - 35 + "px";
+// }, 10);
+// END OF Move catcher slower
 
-// Detect X coordinate of the mouse cursor
-htmlPlayArea.onmousemove = getCursorPosX;
+// 1-3. Using obj/catcher.js to instanciate catcher, call move()
+var catcher = new Catcher;
+catcher.move();
 
-function getCursorPosX(domEvent) {
-  mouseX = domEvent.clientX;
-}
+//==== 2. Create random falling objects ===
 
-// Move the catcher
-var animate = setInterval(function(){
-if (mouseX-catcherX > 0 && catcherX < 388) {
-  catcherX += 0.5;
-}
-if (mouseX-catcherX < 0 && catcherX >65) {
-  catcherX -= 0.5;
-}
-    catcher.style.left = catcherX - 35 +"px";
-}, 10);
-
-// ==== 2. Create random falling objects ===
-
-// //=== Test1
+// 2-1. Create Falling Object
 //
 // // Functions of the objects
 // var createItem = function() {
@@ -90,7 +96,6 @@ if (mouseX-catcherX < 0 && catcherX >65) {
 //   drop: animateItem
 // }
 //
-//
 // // Instanciate
 // fallingItem.create();
 // var dropNow = function() {
@@ -98,27 +103,23 @@ if (mouseX-catcherX < 0 && catcherX >65) {
 // }
 // htmlStart.onclick = dropNow;
 //
-// // === End of Test1
+// End of 2-1. Create Falling Object
 
-//== Test2: Experiment of class Movable
+//2-2: Create Falling Object with Array
 // 1. set arrays as the options of color, speed etc.
-var arrayOfColor = ['salmon', 'skyblue', 'lightgreen', 'pink', 'tomato']; // Change to image array
-var arrayOfSpeed = ['0.3s', '0.5s', '0.8s', '1s', '1.2s'];
-var arrayOfPosition = ['0px','100px','200px','300px','350px',];
-var testArray = ['A', 'B', 'C', 'D', 'E'];
-
-
-// 2. create a class for falling item with paramaters
-
-// Object
-var createNewItem = function(p_name, p_colorIndex, p_speed, p_position, p_classIndex) {
+  var arrayOfColor = ['salmon', 'skyblue', 'lightgreen', 'pink', 'tomato']; // Change to image array
+  var arrayOfSpeed = ['0.3s', '0.5s', '0.8s', '1s', '1.2s'];
+  var arrayOfPosition = ['0px','100px','200px','300px','350px',];
+  var classArray = ['A', 'B', 'C', 'D', 'E'];
+  // 2. create a class for falling item with paramaters
+  // Object
+  var createNewItem = function(p_name, p_colorIndex, p_speed, p_position, p_classIndex) {
   // receive paramaters and set it to this.***
   this.name = p_name; // the paramater 'name' is passed to this.[name of var] as a value
   this.color = arrayOfColor[p_colorIndex]; // pick a color from arrayOfColor
   this.speed = arrayOfSpeed[p_speed]; // pick a speed from arrayOfSpeed
   this.position = arrayOfPosition[p_position]; // pick a falling position
-  this.classIndex = testArray[p_classIndex];
-
+  this.classIndex = classArray[p_classIndex];
 
   // common properties among the falling item
   htmlObjArea.innerHTML += "<div class='newObj" + this.classIndex + "'></div>";
