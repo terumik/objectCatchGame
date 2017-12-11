@@ -1,0 +1,31 @@
+body, html {
+    margin: 0px;
+    padding: 0px;
+}
+
+#area{
+  border: 1px red solid;
+  width: 400px;
+  height: 500px;
+  margin: 30px;
+}
+#catcher{
+  position: absolute;
+  top: 500px;
+}
+
+#obj-area{
+  position: absolute;
+  top: 35px;
+  left: 30px;
+  width: 400px;
+}
+
+#start{
+  color: white;
+  background-color: salmon;
+  width: 100px;
+  margin: 30px;
+  text-align: center;
+  cursor: pointer;
+}
