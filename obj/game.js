@@ -4,7 +4,7 @@ function Game() {
   this.score = 0;
   this.field = new Field();
 
-// Functions which are called after clicking the start button
+  // Functions which are called after clicking the start button
   this.start = function() {
     countDownTimer = setInterval(this.countdown, 1000);
     var field = new Field();
@@ -23,6 +23,7 @@ function Game() {
       htmlStart.innerHTML = "Time Up!";
       clearInterval(countDownTimer);
       clearInterval(generateItem);
+      clearInterval(fallDown);
     }
   }
   this.decreaseHealth = function() {
@@ -37,7 +38,7 @@ function Game() {
   this.foodItemProbability = function() {
 
   }
-  this.nonItemProbability = function() {
+  this.nonFoodItemProbability = function() {
 
   }
 

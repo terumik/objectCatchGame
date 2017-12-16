@@ -1,6 +1,3 @@
-// () ... for debug and test purpose. you can delete them
-// *value may need to be changed
-
 window.onload = pageReady;
 
 function pageReady() {

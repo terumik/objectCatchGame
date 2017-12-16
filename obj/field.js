@@ -8,14 +8,14 @@ function Field() {
     catcher.move();
   }
   this.startGenerateItem = function() {
-    generateItem = setInterval(this.generateFallingItem , 1500);
+    generateItem = setInterval(this.generateFallingItem, 700);
   }
 
   // Generate Object
   this.generateFallingItem = function() {
     var indexOfArray = random(7);
     var typeOfItem = 0;
-    var speed = random(10) + 5;
+    var speed = random(5) + 2;
     var score = 0;
     var xPos = random(360);
     // Select image based on generated random number
