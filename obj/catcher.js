@@ -33,7 +33,4 @@ this.moveCatcher = function() {
     return catcherX;
   }
 
-
-
-
 }

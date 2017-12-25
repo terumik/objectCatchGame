@@ -147,10 +147,22 @@ function Field() {
             health -= 1;
           }
         }
-        htmlLife.innerHTML = health;
+        // htmlLife.innerHTML = health;
+        displayHealth(health);
         htmlScore.innerHTML = score;
       }
     }
   }
 
+  function displayHealth(p_health) {
+    if (p_health==2) {
+      _gid("life3").src = 'img/nolife.svg';
+    }
+    if (p_health==1) {
+      _gid("life2").src = 'img/nolife.svg';
+    }
+    if (p_health==0) {
+      _gid("life1").src = 'img/nolife.svg';
+    }
+  }
 }
