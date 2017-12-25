@@ -13,18 +13,21 @@ function random(maxNum) {
   return randomNum;
 }
 
-
 var htmlPlayArea = _gid("area");
 var htmlStart = _gid("start");
 var htmlCatcher = _gid("catcher");
 
 // game.js
-var remainingTime = 10; //change to 60
+var remainingTime = 60; //change to 60
+var health = 3;
+var score = 0;
 var countDownTimer;
 
 // field.js
 var itemId = 0;
-var generateItem;
+var updateScene;
+var htmlLife = _gid("life");
+var htmlScore = _gid("score");
 
-// fallingItem.js
-var fallDown;
+// catcher.js
+var animateCatcher;

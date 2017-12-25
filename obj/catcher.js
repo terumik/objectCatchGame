@@ -1,33 +1,39 @@
-function Catcher() {
-  this.image = "/img/catcher.png"; // img url. necessary??
-  this.width = "80px";
-  this.height = "31px";
-  this.speed = 180; // moving speed (move 180px/sec)
-  this.x = 215; // default value of center of the catcher
+function Catcher(p_fieldWidth) {
+  var self = this;
+  var mouseX;
+  var catcherX = p_fieldWidth/2; // For JS. Initial value of the catcher = Centre of the field
+  htmlCatcher.style.left = catcherX - this.width/2 + 'px'; // For CSS. Place img on the centre of the field
 
-  this.move = function() {
-    // Variables
-    var mouseX = 215; // initial position (centre of the area = 400+30/2)
-    var catcherX = 215;
+  // this.image = "/img/catcher.png"; // img url. necessary??
+  this.width = 80;
+  this.height = 30;
+  this.speed = 250; // moving speed (move 250px/sec)
 
-    // Detect X coordinate of the mouse cursor
-    htmlPlayArea.onmousemove = getCursorPosX;
-    function getCursorPosX(domEvent) {
+  // Detect X coordinate of the mouse cursor
+  htmlPlayArea.onmousemove = function(domEvent) {
       mouseX = domEvent.clientX;
     }
 
-    // Move the catcher every 10 ms within the area
-    var animateCatcher = setInterval(function(){
-      //move to the right
-    if (mouseX-catcherX > 0 && catcherX < 390) {
-      // controll the speed
-      catcherX += 1.8;
-    }
-      //move to the left
-    if (mouseX-catcherX < 0 && catcherX > 70) {
-      catcherX -= 1.8;
-    }
-        htmlCatcher.style.left = catcherX - 70 + "px";
-    }, 10);
+this.moveCatcher = function() {
+  var leftMargin = htmlPlayArea.getBoundingClientRect().left;
+  //move to the right && movement limitation
+  if (mouseX - catcherX - leftMargin > 0 && catcherX < p_fieldWidth - this.width/2) {
+  // controll the speed
+    catcherX += this.speed/100;
   }
+  //move to the left && movement limitation
+  if (mouseX - catcherX - leftMargin < 0 && catcherX > 0 + this.width/2) {
+    catcherX -= this.speed/100;
+  }
+  if (mouseX === catcherX) {
+    catcherX = mouseX;
+  }
+    htmlCatcher.style.left = catcherX - self.width/2 + "px";
+
+    return catcherX;
+  }
+
+
+
+
 }
